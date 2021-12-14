@@ -10,6 +10,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/index.css', methods=['POST', 'GET'])
+def css():
+    return render_template('index.css')
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -27,10 +30,10 @@ def upload():
         keypoint_extraction(raw_imgpath)
         img_url = url_for(process_imgpath)
         data = {'img_url': img_url}
-        print(url_for('index'))
+        print(data)
         data = json.dump(data)
         return data
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="127.0.0.1", port=5050)
+    app.run(debug=True, host="127.0.0.1", port=5500)
