@@ -35,9 +35,9 @@ of Simple CSS Waves-->
             </g>
         </svg>
         <!--Content before waves-->
-        <div class="img">
-            <img src="https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg"
-                width="50%"></img>
+        <div>
+            <img id="img" src="{{ url_for('static', filename='display.png') }}"
+                width="700px" height="500px"></img>
 
             <form id="uploadForm" method="post" enctype="multipart/form-data">
                 <input type="file" name="file" accept="png,jpg">
@@ -73,9 +73,7 @@ of Simple CSS Waves-->
 <script src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
     $('#upFileBtn').click(function () {
-        console.log(
-            1111
-        );
+        $('#img').attr('src', "{{ url_for('static', filename='raw.png') }}");
         var formFile = new FormData($('#uploadForm')[0]);
         $.ajax({
             url: "/upload",

@@ -10,14 +10,16 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+
 @app.route('/index.css', methods=['POST', 'GET'])
 def css():
     return render_template('index.css')
 
+
 @app.route('/upload', methods=['POST'])
 def upload():
-    raw_imgpath = "./static/raw.png"
-    process_imgpath = "./static/processed.png"
+    raw_imgpath = "static/raw.png"
+    process_imgpath = "static/processed.png"
     if request.method == 'POST':
         if os.path.exists(process_imgpath):
             os.system("rm -r {}".format(process_imgpath))
@@ -27,11 +29,11 @@ def upload():
         upload_path = os.path.join('./static/raw.png')  # 注意：没有的文件夹一定要先创建，不然会提示没有该路径
         f.save(upload_path)
 
-        keypoint_extraction(raw_imgpath)
-        img_url = url_for(process_imgpath)
+        keypoint_extraction(raw_imgpath, process_imgpath)
+        img_url = url_for('static', filename='processed.png')
         data = {'img_url': img_url}
         print(data)
-        data = json.dump(data)
+        data = json.dumps(data)
         return data
 
 
