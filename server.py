@@ -21,8 +21,8 @@ def upload():
     if request.method == 'POST':
         f = request.files['file']
         img_name = f.filename
-        raw_imgpath = "static\\raw-{}.png".format(img_name)
-        process_imgpath = "static\\processed-{}.png".format(img_name)
+        raw_imgpath = "static/raw-{}.png".format(img_name)
+        process_imgpath = "static/processed-{}.png".format(img_name)
         f.save(raw_imgpath)  # 注意：没有的文件夹一定要先创建，不然会提示没有该路径
 
         img_exist = keypoint_extraction(raw_imgpath, process_imgpath)
