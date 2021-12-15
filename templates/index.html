@@ -73,8 +73,8 @@ of Simple CSS Waves-->
 <script src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
     $('#upFileBtn').click(function () {
-        $('#img').attr('src', "{{ url_for('static', filename='raw.png') }}");
         var formFile = new FormData($('#uploadForm')[0]);
+        $('#img').attr('src', "{{ url_for('static', filename='loading.png') }}");
         $.ajax({
             url: "/upload",
             type: "POST",
@@ -83,7 +83,15 @@ of Simple CSS Waves-->
             contentType: false,
             success: function (data) {
                 var d = JSON.parse(data) // 解析JSON数据
-                $('#img').attr('src', d.img_url); // 更新显示的图片
+                console.log(
+                    d.img_exist
+                )
+                if (d.img_exist==1){
+                    $('#img').attr('src', d.img_url); // 更新显示的图片
+                } else {
+                    $('#img').attr('src', "{{ url_for('static', filename='failed.png') }}");
+                }
+
             }
         })
     })

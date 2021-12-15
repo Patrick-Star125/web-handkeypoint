@@ -18,24 +18,20 @@ def css():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    raw_imgpath = "static/raw.png"
-    process_imgpath = "static/processed.png"
     if request.method == 'POST':
-        if os.path.exists(process_imgpath):
-            os.system("rm -r {}".format(process_imgpath))
-        if os.path.exists(raw_imgpath):
-            os.system("rm -r {}".format(raw_imgpath))
         f = request.files['file']
-        upload_path = os.path.join('./static/raw.png')  # 注意：没有的文件夹一定要先创建，不然会提示没有该路径
-        f.save(upload_path)
+        img_name = f.filename
+        raw_imgpath = "static\\raw-{}.png".format(img_name)
+        process_imgpath = "static\\processed-{}.png".format(img_name)
+        f.save(raw_imgpath)  # 注意：没有的文件夹一定要先创建，不然会提示没有该路径
 
-        keypoint_extraction(raw_imgpath, process_imgpath)
-        img_url = url_for('static', filename='processed.png')
-        data = {'img_url': img_url}
+        img_exist = keypoint_extraction(raw_imgpath, process_imgpath)
+        img_url = url_for('static', filename='processed-{}.png'.format(img_name))
+        data = {'img_url': img_url, 'img_exist': img_exist}
         print(data)
         data = json.dumps(data)
         return data
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="127.0.0.1", port=5500)
+    app.run(debug=True, host="0.0.0.0", port=5500)
