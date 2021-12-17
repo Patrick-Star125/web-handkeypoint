@@ -40,7 +40,8 @@ of Simple CSS Waves-->
                 width="700px" height="500px"></img>
 
             <form id="uploadForm" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" accept="png,jpg">
+                <input type="file" name="file" accept="png,jpg" id="chooseFile" hidden>
+                <input type="button" value="选择文件" id="chooseFileBtn">
                 <input type="button" value="上传" id="upFileBtn">
             </form>
         </div>
@@ -66,13 +67,16 @@ of Simple CSS Waves-->
     <!--Header ends-->
     <!--Content starts-->
     <div class="content flex">
-        <p>Net Punk | 2021 | github</p>
+        <p onclick="javascript:window.location.href='https://github.com/Patrick-Star125'">Net Punk | 2021 | github</p>
     </div>
     <!--Content ends-->
 </body>
 <script src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
-    $('#upFileBtn').click(function () {
+    $("#chooseFileBtn").on("click", function(){
+        $("#chooseFile").click()
+    });
+    $('#upFileBtn').on("click", function(){
         var formFile = new FormData($('#uploadForm')[0]);
         $('#img').attr('src', "{{ url_for('static', filename='loading.png') }}");
         $.ajax({
@@ -91,7 +95,6 @@ of Simple CSS Waves-->
                 } else {
                     $('#img').attr('src', "{{ url_for('static', filename='failed.png') }}");
                 }
-
             }
         })
     })

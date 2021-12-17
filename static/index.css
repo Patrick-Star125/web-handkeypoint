@@ -113,3 +113,37 @@ p {
     font-size:24px;
   }
 }
+
+#upFileBtn {
+	width: 100px;
+	background: #1591bf;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+#upFileBtn:hover, #upFileBtn:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+
+#chooseFileBtn {
+	width: 100px;
+	background: #1591bf;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+
+#chooseFileBtn:hover {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
